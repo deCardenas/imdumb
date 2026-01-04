@@ -14,3 +14,11 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+Utilizar el siguiente comando para definir la variable TMDB_KEY
+
+- flutter build apk --dart-define=TMDB_KEY=xxxx
+
+Y para hacer uso de ella
+
+- const tmdbApiKey = String.fromEnvironment('TMDB_KEY');

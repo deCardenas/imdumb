@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:imdumb/core/client/api_client.dart';
 import 'package:imdumb/core/client/api_response.dart';
 import 'package:imdumb/core/constants/api_constants.dart';
@@ -12,9 +13,11 @@ class DioClient implements ApiClient {
       ..connectTimeout = const Duration(seconds: 10)
       ..receiveTimeout = const Duration(seconds: 10);
 
-    _dio.interceptors.add(
-      LogInterceptor(requestBody: true, responseBody: true),
-    );
+    if (kDebugMode) {
+      _dio.interceptors.add(
+        LogInterceptor(requestBody: true, responseBody: true),
+      );
+    }
   }
 
   @override
