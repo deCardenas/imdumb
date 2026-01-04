@@ -1,6 +1,13 @@
+import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart';
+import 'package:imdumb/core/services/remote_config_service.dart';
+import 'package:imdumb/firebase_options.dart' show DefaultFirebaseOptions;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  RemoteConfigService.instance.init();
   runApp(const MyApp());
 }
 
