@@ -1,6 +1,6 @@
 import 'package:imdumb/core/client/api_response.dart' show ApiResponse;
 
-abstract class ApiClient {
+abstract interface class ApiClient {
   Future<ApiResponse> get(
     String path, {
     Map<String, dynamic>? queryParameters,

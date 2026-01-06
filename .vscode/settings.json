@@ -10,5 +10,8 @@
         "**/.symlinks": false,
         "**/.plugin_symlinks": false
     },
-    "explorerExclude.backup": {}
+    "explorerExclude.backup": {},
+    "cSpell.words": [
+        "imdumb"
+    ]
 }

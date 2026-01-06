@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ExplorePage extends StatelessWidget {
+final class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});
 
   @override

@@ -4,14 +4,14 @@ import 'package:imdumb/core/assets/assets.gen.dart';
 import 'package:imdumb/core/services/remote_config_service.dart';
 import 'package:imdumb/routes/app_router.dart';
 
-class SplashPage extends ConsumerStatefulWidget {
+final class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
   ConsumerState<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends ConsumerState<SplashPage> {
+final class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     // - Auth
     // - Tokens
     // - Configuración inicial
-
+    if (!mounted) return;
     const HomeRoute().go(context);
   }
 

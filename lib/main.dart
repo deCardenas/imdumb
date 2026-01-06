@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:imdumb/app_theme.dart' show lightTheme, darkTheme;
 import 'package:imdumb/core/loggers/state_logger.dart';
 import 'package:imdumb/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:imdumb/routes/app_router.dart';
@@ -87,42 +88,9 @@ class _MyAppState extends State<MyApp> {
           orElse: () => supportedLocales.first,
         );
       },
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        navigationBarTheme: NavigationBarThemeData(
-          height: 68,
-          elevation: 4,
-          indicatorColor: Colors.deepPurple.withAlpha(100),
-          labelTextStyle: WidgetStateProperty.all(
-            const TextStyle(fontWeight: FontWeight.w600),
-          ),
-          iconTheme: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.selected)) {
-              return const IconThemeData(size: 26);
-            }
-            return const IconThemeData(size: 22);
-          }),
-        ),
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-        navigationBarTheme: NavigationBarThemeData(
-          height: 68,
-          elevation: 4,
-          indicatorColor: Colors.deepPurple.withAlpha(100),
-          labelTextStyle: WidgetStateProperty.all(
-            const TextStyle(fontWeight: FontWeight.w600),
-          ),
-          iconTheme: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.selected)) {
-              return const IconThemeData(size: 26);
-            }
-            return const IconThemeData(size: 22);
-          }),
-        ),
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }

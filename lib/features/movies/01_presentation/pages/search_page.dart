@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatelessWidget {
+final class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override

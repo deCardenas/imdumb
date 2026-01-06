@@ -12,7 +12,7 @@ import 'package:imdumb/features/splash/01_presentation/pages/splash_page.dart';
 part 'app_router.g.dart';
 
 @TypedGoRoute<SplashRoute>(path: '/')
-class SplashRoute extends GoRouteData with $SplashRoute {
+final class SplashRoute extends GoRouteData with $SplashRoute {
   const SplashRoute();
 
   @override
@@ -28,7 +28,7 @@ class SplashRoute extends GoRouteData with $SplashRoute {
     TypedGoRoute<ExploreRoute>(path: '/explore'),
   ],
 )
-class MainShellRoute extends ShellRouteData {
+final class MainShellRoute extends ShellRouteData {
   const MainShellRoute();
 
   @override
@@ -37,7 +37,7 @@ class MainShellRoute extends ShellRouteData {
   }
 }
 
-class HomeRoute extends GoRouteData with $HomeRoute {
+final class HomeRoute extends GoRouteData with $HomeRoute {
   const HomeRoute();
 
   @override
@@ -46,7 +46,7 @@ class HomeRoute extends GoRouteData with $HomeRoute {
   }
 }
 
-class FavoritesRoute extends GoRouteData with $FavoritesRoute {
+final class FavoritesRoute extends GoRouteData with $FavoritesRoute {
   const FavoritesRoute();
 
   @override
@@ -55,7 +55,7 @@ class FavoritesRoute extends GoRouteData with $FavoritesRoute {
   }
 }
 
-class ExploreRoute extends GoRouteData with $ExploreRoute {
+final class ExploreRoute extends GoRouteData with $ExploreRoute {
   const ExploreRoute();
 
   @override
@@ -65,7 +65,7 @@ class ExploreRoute extends GoRouteData with $ExploreRoute {
 }
 
 @TypedGoRoute<SettingsRoute>(path: '/settings')
-class SettingsRoute extends GoRouteData with $SettingsRoute {
+final class SettingsRoute extends GoRouteData with $SettingsRoute {
   const SettingsRoute();
 
   @override
@@ -75,7 +75,7 @@ class SettingsRoute extends GoRouteData with $SettingsRoute {
 }
 
 @TypedGoRoute<SearchRoute>(path: '/search')
-class SearchRoute extends GoRouteData with $SearchRoute {
+final class SearchRoute extends GoRouteData with $SearchRoute {
   const SearchRoute();
 
   @override
@@ -85,7 +85,7 @@ class SearchRoute extends GoRouteData with $SearchRoute {
 }
 
 @TypedGoRoute<MovieDetailRoute>(path: '/movie/:id')
-class MovieDetailRoute extends GoRouteData with $MovieDetailRoute {
+final class MovieDetailRoute extends GoRouteData with $MovieDetailRoute {
   const MovieDetailRoute({required this.id});
 
   final int id;
