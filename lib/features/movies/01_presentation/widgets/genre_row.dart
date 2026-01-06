@@ -19,6 +19,37 @@ class GenreRow extends ConsumerStatefulWidget {
 
 class _GenreRowState extends ConsumerState<GenreRow> {
   int get genreId => widget.genre.id;
+
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController()..addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final position = _scrollController.position;
+
+    if (position.pixels >= position.maxScrollExtent - 200) {
+      final moviesPage = ref.read(moviesByGenreProvider(genreId));
+      if (moviesPage.requireValue.isLoadingMore) return;
+      if (moviesPage.requireValue.paginationError == null) {
+        ref.read(moviesByGenreProvider(genreId).notifier).loadMore();
+      } else {
+        ref.read(moviesByGenreProvider(genreId).notifier).retryPagination();
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final moviesPage = ref.watch(moviesByGenreProvider(genreId));
@@ -30,6 +61,7 @@ class _GenreRowState extends ConsumerState<GenreRow> {
           height: 400, // altura de la fila horizontal
           child: moviesPage.when(
             data: (data) => ListView.builder(
+              controller: _scrollController,
               scrollDirection: Axis.horizontal,
               itemCount: data.movies.length,
               itemBuilder: (context, index) => MovieVerticalCard(
