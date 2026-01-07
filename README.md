@@ -75,36 +75,36 @@ el proyecto:
 
 ```yaml
 dependencies:
-    flutter:
-        sdk: flutter
-    flutter_localizations:
-        sdk: flutter
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
-    cupertino_icons: 1.0.8
-    firebase_remote_config: 6.1.3
-    firebase_crashlytics: 5.0.6
-    firebase_analytics: 12.1.0
-    firebase_core: 4.3.0
-    dio: 5.9.0
-    flutter_riverpod: 3.1.0
-    go_router: 17.0.1
-    riverpod_annotation: ^4.0.0
-    flutter_animate: ^4.5.2
-    shared_preferences: ^2.5.4
-    carousel_slider: ^5.1.1
-    hive: ^2.2.3
-    path_provider: ^2.1.5
+  cupertino_icons: 1.0.8
+  firebase_remote_config: 6.1.3
+  firebase_crashlytics: 5.0.6
+  firebase_analytics: 12.1.0
+  firebase_core: 4.3.0
+  dio: 5.9.0
+  flutter_riverpod: 3.1.0
+  go_router: 17.0.1
+  riverpod_annotation: ^4.0.0
+  flutter_animate: ^4.5.2
+  shared_preferences: ^2.5.4
+  carousel_slider: ^5.1.1
+  hive: ^2.2.3
+  path_provider: ^2.1.5
 
 dev_dependencies:
-    flutter_test:
-        sdk: flutter
-    build_runner: ^2.10.4
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.10.4
 
-    flutter_lints: 6.0.0
-    flutter_launcher_icons: 0.14.4
-    go_router_builder: 4.1.3
-    flutter_gen_runner: 5.12.0
-    riverpod_generator: 4.0.0+1
+  flutter_lints: 6.0.0
+  flutter_launcher_icons: 0.14.4
+  go_router_builder: 4.1.3
+  flutter_gen_runner: 5.12.0
+  riverpod_generator: 4.0.0+1
 ```
 
 > ⚠️ **Nota:** Las versiones pueden ajustarse según la versión de Flutter
@@ -353,8 +353,8 @@ Este proyecto aplica los principios SOLID como base para lograr un código
 mantenible, escalable, testeable y desacoplado, alineado con Clean Architecture
 y buenas prácticas en Flutter.
 
-- **Single Responsibility Principle (SRP)**: Single Responsibility Principle
-  (SRP)
+- **Single Responsibility Principle (SRP)**: Una clase debe tener una sola razón
+  para cambiar.
 - **Open / Closed Principle (OCP)**: Las entidades de software deben estar
   abiertas para extensión, pero cerradas para modificación.
 - **Liskov Substitution Principle (LSP)**: Las subclases deben poder sustituir a
@@ -363,3 +363,40 @@ y buenas prácticas en Flutter.
   interfaces que no utilizan.
 - **Dependency Inversion Principle (DIP)**: Los módulos de alto nivel no deben
   depender de módulos de bajo nivel, ambos deben depender de abstracciones.
+
+**Archivos que contienen los principios SOLID**
+
+```
+- lib
+  - core
+    - client
+      - api_client.dart
+      - dio_client.dart
+  - features
+    - movies
+      - 02_domain
+        - repositories
+          - i_favorite_movie_repository.dart
+          - i_movies_repository.dart
+        - use_cases
+          - add_favorite_movie_use_case.dart
+          - get_favorite_movies_use_case.dart
+          - get_genres_use_case.dart
+          - get_movie_credits_use_case.dart
+          - get_movie_detail_use_case.dart
+          - get_movie_images_use_case.dart
+          - get_movie_list_use_case.dart
+          - get_movies_by_genre_use_case.dart
+          - is_favorite_movie_use_case.dart
+          - remove_favorite_movie_use_case.dart
+      - 03_data
+        - data_sources
+          - base_remote_data_source.dart
+          - movies_remote_data_source.dart
+        - mappers
+          - credits_response_mapper.dart
+          - genre_model_mapper.dart
+          - movie_detail_model_mapper.dart
+        - models
+          - genres_response.dart
+```

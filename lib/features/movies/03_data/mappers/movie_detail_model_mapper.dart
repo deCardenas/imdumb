@@ -2,6 +2,13 @@ import 'package:imdumb/features/movies/02_domain/entities/movie_detail.dart';
 import 'package:imdumb/features/movies/03_data/mappers/genre_model_mapper.dart';
 import 'package:imdumb/features/movies/03_data/models/movie_detail_model.dart';
 
+/// MovieDetailModelMapper define un mapper
+///
+///   SOLID:
+/// - SRP (Single Responsibility):
+///   Su única responsabilidad es transformar un modelo de datos en una entidad de dominio.
+/// - Open / Closed Principle (OCP):
+///   Permite extender el mapeo agregando nuevas transformaciones sin afectar el código existente.
 extension MovieDetailModelMapper on MovieDetailModel {
   MovieDetail toEntity() {
     return MovieDetail(

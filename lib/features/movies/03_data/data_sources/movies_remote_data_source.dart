@@ -6,6 +6,14 @@ import 'package:imdumb/features/movies/03_data/models/images_response.dart';
 import 'package:imdumb/features/movies/03_data/models/movie_detail_model.dart';
 import 'package:imdumb/features/movies/03_data/models/movies_responde.dart';
 
+/// MoviesRemoteDataSource define la fuente de datos remota de las películas
+///
+///   SOLID:
+/// - SRP (Single Responsibility):
+///   Se encarga exclusivamente de obtener datos remotos de películas.
+///
+/// - LSP (Liskov Substitution Principle):
+///   Sustituye correctamente a IMoviesDataSource en cualquier contexto válido.
 final class MoviesRemoteDataSource extends BaseRemoteDataSource
     implements IMoviesDataSource {
   const MoviesRemoteDataSource(super.apiClient);

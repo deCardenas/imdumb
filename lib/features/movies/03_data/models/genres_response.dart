@@ -1,3 +1,6 @@
+///   SOLID:
+/// - SRP (Single Responsibility):
+///   Representa y serializa únicamente la respuesta de géneros desde la API.
 final class GenresResponse {
   final List<GenreModel> genres;
 
