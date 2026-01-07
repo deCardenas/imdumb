@@ -2,6 +2,7 @@ import 'package:imdumb/features/movies/01_presentation/notifiers/movies_notifier
 import 'package:imdumb/features/movies/02_domain/providers/domain_providers.dart';
 import 'package:imdumb/features/movies/02_domain/use_cases/add_favorite_movie_use_case.dart';
 import 'package:imdumb/features/movies/02_domain/use_cases/get_movie_list_use_case.dart';
+import 'package:imdumb/features/movies/02_domain/use_cases/is_favorite_movie_use_case.dart';
 import 'package:imdumb/features/movies/02_domain/use_cases/remove_favorite_movie_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,16 +14,23 @@ class MovieListNotifier extends _$MovieListNotifier {
   late final GetMovieListUseCase _getMovieList;
   late final AddFavoriteMovieUseCase _addFavoriteMovie;
   late final RemoveFavoriteMovieUseCase _removeFavoriteMovie;
+  late final IsFavoriteMovieUseCase _isFavoriteMovie;
 
   @override
   Future<MoviesPage> build(String list) async {
     _getMovieList = ref.read(getMovieListUseCaseProvider);
     _addFavoriteMovie = ref.read(addFavoriteMovieUseCaseProvider);
     _removeFavoriteMovie = ref.read(removeFavoriteMovieUseCaseProvider);
+    _isFavoriteMovie = ref.read(isFavoriteMovieUseCaseProvider);
 
     final data = await _getMovieList(list, _page);
 
-    return MoviesPage(movies: data.results, hasMore: _page < data.totalPages);
+    return MoviesPage(
+      movies: data.results
+          .map((e) => e.copyWith(_isFavoriteMovie(e.id)))
+          .toList(),
+      hasMore: _page < data.totalPages,
+    );
   }
 
   Future<void> loadMore() async {
@@ -41,7 +49,10 @@ class MovieListNotifier extends _$MovieListNotifier {
 
       state = AsyncData(
         current.copyWith(
-          movies: [...current.movies, ...data.results],
+          movies: [
+            ...current.movies,
+            ...data.results.map((e) => e.copyWith(_isFavoriteMovie(e.id))),
+          ],
           hasMore: _page < data.totalPages,
           isLoadingMore: false,
         ),

@@ -20,17 +20,10 @@ final class _SplashPageState extends ConsumerState<SplashPage> {
   }
 
   Future<void> _initApp() async {
-    // Simula carga inicial
-
-    // Aquí normalmente:
-    // - Firebase Remote Config
     await Future.wait([
       RemoteConfigService.instance.init(),
       AppPreferencesService.instance.init(),
     ]);
-    // - Auth
-    // - Tokens
-    // - Configuración inicial
     final appPreferences = AppPreferencesService.instance;
     if (appPreferences.movieLayout == null ||
         appPreferences.movieList == null) {

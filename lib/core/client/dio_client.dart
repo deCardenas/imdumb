@@ -4,6 +4,17 @@ import 'package:imdumb/core/client/api_client.dart';
 import 'package:imdumb/core/client/api_response.dart';
 import 'package:imdumb/core/constants/api_constants.dart';
 
+/// Implementación concreta de ApiClient usando Dio.
+///
+///   SOLID:
+/// - SRP:
+///   Su única responsabilidad es realizar llamadas HTTP con Dio.
+///
+/// - LSP (Liskov Substitution):
+///   Puede reemplazar a ApiClient sin romper el comportamiento esperado.
+///
+/// - DIP:
+///   Implementa una abstracción, no es usada directamente por capas superiores.
 final class DioClient implements ApiClient {
   final Dio _dio;
 
