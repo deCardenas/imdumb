@@ -31,7 +31,7 @@ class AppBackground extends StatelessWidget {
         CustomPaint(
           size: Size.infinite,
           painter: GridPainter(
-            color: scheme.onSurface.withOpacity(isDark ? 0.06 : 0.08),
+            color: scheme.onSurface.withAlpha(isDark ? 15 : 20),
           ),
         ),
 

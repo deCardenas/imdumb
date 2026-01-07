@@ -36,7 +36,7 @@ class ImageWrapper extends StatelessWidget {
                   loadingProgress == null
                   ? child
                   : Icon(
-                      Icons.movie_outlined,
+                      defaultIcon,
                       size: 40,
                       color: colorScheme.onSurface.withAlpha(120),
                     ),

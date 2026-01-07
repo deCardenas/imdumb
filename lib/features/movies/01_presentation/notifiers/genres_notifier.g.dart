@@ -13,7 +13,7 @@ part of 'genres_notifier.dart';
 final genresProvider = GenresNotifierProvider._();
 
 final class GenresNotifierProvider
-    extends $NotifierProvider<GenresNotifier, AbstractState<List<Genre>>> {
+    extends $AsyncNotifierProvider<GenresNotifier, List<Genre>> {
   GenresNotifierProvider._()
     : super(
         from: null,
@@ -31,34 +31,21 @@ final class GenresNotifierProvider
   @$internal
   @override
   GenresNotifier create() => GenresNotifier();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AbstractState<List<Genre>> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<AbstractState<List<Genre>>>(value),
-    );
-  }
 }
 
-String _$genresNotifierHash() => r'6f31bfdd8c4241851f2b204df2f9b228f9a49bb6';
+String _$genresNotifierHash() => r'93755e6839539d638d818bd4dea82ca2d0e02b44';
 
-abstract class _$GenresNotifier extends $Notifier<AbstractState<List<Genre>>> {
-  AbstractState<List<Genre>> build();
+abstract class _$GenresNotifier extends $AsyncNotifier<List<Genre>> {
+  FutureOr<List<Genre>> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref =
-        this.ref
-            as $Ref<AbstractState<List<Genre>>, AbstractState<List<Genre>>>;
+    final ref = this.ref as $Ref<AsyncValue<List<Genre>>, List<Genre>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<
-                AbstractState<List<Genre>>,
-                AbstractState<List<Genre>>
-              >,
-              AbstractState<List<Genre>>,
+              AnyNotifier<AsyncValue<List<Genre>>, List<Genre>>,
+              AsyncValue<List<Genre>>,
               Object?,
               Object?
             >;

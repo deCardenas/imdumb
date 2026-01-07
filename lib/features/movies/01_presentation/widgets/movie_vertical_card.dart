@@ -6,17 +6,27 @@ import 'package:imdumb/features/movies/02_domain/entities/movie.dart';
 class MovieVerticalCard extends StatelessWidget {
   final Movie movie;
   final VoidCallback? onTap;
-  const MovieVerticalCard({super.key, required this.movie, this.onTap});
+  final bool showFavoriteButton;
+  final VoidCallback? onFavoriteTap;
+  const MovieVerticalCard({
+    super.key,
+    required this.movie,
+    this.onTap,
+    this.showFavoriteButton = false,
+    this.onFavoriteTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
+    final width = (size.width / 2) - 16;
 
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        width: 220,
+        width: width,
         margin: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerLowest,
@@ -58,7 +68,18 @@ class MovieVerticalCard extends StatelessWidget {
                 ),
               ),
             ),
-
+            if (showFavoriteButton)
+              Positioned(
+                top: 0,
+                right: 0,
+                child: IconButton(
+                  onPressed: onFavoriteTap,
+                  icon: Icon(
+                    movie.isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: colorScheme.surfaceContainerHighest,
+                  ),
+                ),
+              ),
             Positioned(
               bottom: 0,
               right: 0,

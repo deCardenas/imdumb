@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:imdumb/core/client/api_client.dart';
 import 'package:imdumb/core/client/api_response.dart';
 import 'package:imdumb/core/constants/api_constants.dart';
-import 'package:imdumb/core/errors/exceptions.dart';
 
 final class DioClient implements ApiClient {
   final Dio _dio;
@@ -77,12 +75,10 @@ final class DioClient implements ApiClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
-    await _request(
-      _dio.delete(
-        path,
-        queryParameters: queryParameters,
-        options: Options(headers: headers),
-      ),
+    await _dio.delete(
+      path,
+      queryParameters: queryParameters,
+      options: Options(headers: headers),
     );
     final response = await _dio.delete(
       path,
@@ -91,25 +87,6 @@ final class DioClient implements ApiClient {
     );
 
     return _toApiResponse(response);
-  }
-
-  Future<Response<T>> _request<T>(Future<Response<T>> request) async {
-    Response response;
-    try {
-      response = await request;
-      return response as Response<T>;
-    } on DioException catch (e, stack) {
-      FirebaseCrashlytics.instance.recordError(e, stack, fatal: false);
-      if (e.type == DioExceptionType.badResponse) {
-        switch (e.response?.statusCode) {
-          case 405:
-            throw const NotAuthorizedException();
-        }
-      } else if (e.message == 'ConnectionServerFailure') {
-        throw const ConnectionServerException();
-      }
-      rethrow;
-    }
   }
 
   ApiResponse _toApiResponse(Response response) {

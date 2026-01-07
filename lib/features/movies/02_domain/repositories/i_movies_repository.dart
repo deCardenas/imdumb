@@ -10,4 +10,5 @@ abstract interface class IMoviesRepository {
   Future<MovieDetail> getMovieDetail(int movieId);
   Future<ImagesResponseEntity> getMovieImages(int movieId);
   Future<CreditsResponseEntity> getMovieCredits(int movieId);
+  Future<MoviesResponseEntity> getMovieList(String list, int page);
 }

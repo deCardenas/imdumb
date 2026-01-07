@@ -18,11 +18,14 @@ final class RemoteConfigService {
     await _remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: const Duration(seconds: 10),
-        minimumFetchInterval: const Duration(hours: 1),
+        minimumFetchInterval: Duration.zero,
       ),
     );
 
-    await _remoteConfig.setDefaults({RemoteConfigKeys.splashSegDuration: 2});
+    await _remoteConfig.setDefaults({
+      RemoteConfigKeys.moviesDefaultLayout: 'horizontal',
+      RemoteConfigKeys.moviesDefaultList: 'popular',
+    });
 
     await _remoteConfig.fetchAndActivate();
   }
@@ -31,9 +34,11 @@ final class RemoteConfigService {
   // Getters tipados
   // =====================
 
-  int get splashSegDuration =>
-      _remoteConfig.getInt(RemoteConfigKeys.splashSegDuration);
-
   String get theMovieDbApiKey =>
       _remoteConfig.getString(RemoteConfigKeys.theMovieDbApiKey);
+
+  String get moviesDefaultLayout =>
+      _remoteConfig.getString(RemoteConfigKeys.moviesDefaultLayout);
+  String get moviesDefaultList =>
+      _remoteConfig.getString(RemoteConfigKeys.moviesDefaultList);
 }

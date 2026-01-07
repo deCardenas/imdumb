@@ -1,8 +1,13 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:imdumb/core/constants/api_constants.dart';
 import 'package:imdumb/features/movies/01_presentation/notifiers/movie_detail_notifier.dart';
+import 'package:imdumb/features/movies/01_presentation/widgets/actor_card.dart';
+import 'package:imdumb/features/movies/01_presentation/widgets/comment_dialog_content.dart';
 import 'package:imdumb/features/movies/01_presentation/widgets/image_wrapper.dart';
+import 'package:imdumb/features/movies/02_domain/entities/credits_response.dart';
+import 'package:imdumb/features/movies/02_domain/entities/images_response.dart';
 import 'package:imdumb/features/shared/01_presentation/pages/base_page.dart';
 
 final class MovieDetailPage extends ConsumerWidget {
@@ -26,12 +31,18 @@ final class MovieDetailPage extends ConsumerWidget {
               children: [
                 Stack(
                   children: [
-                    ImageWrapper(
-                      url: ApiConstants.theMovieDbImageBaseUrl,
-                      imagePath: data.movieDetail.backdropPath,
-                      defaultIcon: Icons.movie_outlined,
-                      width: double.maxFinite,
-                      height: 300,
+                    ClipRRect(
+                      borderRadius: BorderRadiusGeometry.only(
+                        bottomLeft: Radius.circular(32.0),
+                        bottomRight: Radius.circular(32.0),
+                      ),
+                      child: ImageWrapper(
+                        url: ApiConstants.theMovieDbImageBaseUrl,
+                        imagePath: data.movieDetail.backdropPath,
+                        defaultIcon: Icons.movie_outlined,
+                        width: double.maxFinite,
+                        height: 300,
+                      ),
                     ),
                     AppBar(
                       backgroundColor: Colors.transparent,
@@ -103,7 +114,7 @@ final class MovieDetailPage extends ConsumerWidget {
                   margin: const EdgeInsets.only(
                     left: 16.0,
                     right: 16.0,
-                    bottom: 8.0,
+                    bottom: 16.0,
                   ),
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
@@ -117,72 +128,9 @@ final class MovieDetailPage extends ConsumerWidget {
                   ),
                 ),
                 if (data.images?.isNotEmpty == true)
-                  SizedBox(
-                    height: 150,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: data.images!.length,
-                      itemBuilder: (context, index) {
-                        final image = data.images![index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16.0),
-                            child: ImageWrapper(
-                              url: ApiConstants.theMovieDbImageOriginalBaseUrl,
-                              imagePath: image.filePath,
-                              defaultIcon: Icons.movie_outlined,
-                              width: 240,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  _ImagesSection(images: data.images!),
                 if (data.actors?.isNotEmpty == true) ...[
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                      right: 16.0,
-                      bottom: 8.0,
-                    ),
-                    child: Text(
-                      'Actores',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 320,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: data.actors!.length,
-
-                      itemBuilder: (context, index) => Container(
-                        width: 160,
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          spacing: 4,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadiusGeometry.circular(16.0),
-                              child: ImageWrapper(
-                                url: ApiConstants.theMovieDbImageBaseUrl,
-                                imagePath: data.actors![index].profilePath,
-                                defaultIcon: Icons.person_outline,
-                                height: 200,
-                              ),
-                            ),
-                            Text(data.actors![index].name ?? '-', maxLines: 2),
-                            Text(
-                              data.actors![index].character ?? '-',
-                              maxLines: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  _ActorsSection(actors: data.actors!),
                 ],
                 const SizedBox(height: 80),
               ],
@@ -199,7 +147,7 @@ final class MovieDetailPage extends ConsumerWidget {
           ],
         ),
         error: (error, stackTrace) => Text(error.toString()),
-        loading: () => const CircularProgressIndicator(),
+        loading: () => Center(child: const CircularProgressIndicator()),
       ),
     );
   }
@@ -273,57 +221,91 @@ final class MovieDetailPage extends ConsumerWidget {
   }
 }
 
-class CommentDialogContent extends StatelessWidget {
-  final String overview;
-  final TextEditingController textController;
-  const CommentDialogContent({
-    super.key,
-    required this.overview,
-    required this.textController,
-  });
+class _ImagesSection extends StatefulWidget {
+  final List<TMDBImageEntity> images;
+  const _ImagesSection({required this.images});
+
+  @override
+  State<_ImagesSection> createState() => _ImagesSectionState();
+}
+
+class _ImagesSectionState extends State<_ImagesSection> {
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          overview,
-          textAlign: TextAlign.justify,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            height: 1.4,
-            color: colorScheme.onSurface.withAlpha(200),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          'Tu comentario',
-          style: Theme.of(
-            context,
-          ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          decoration: BoxDecoration(
-            color: colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: colorScheme.outline.withAlpha(100)),
-          ),
-          child: TextField(
-            controller: textController,
-            maxLines: 4,
-            cursorColor: colorScheme.primary,
-            style: Theme.of(context).textTheme.bodyMedium,
-            decoration: InputDecoration(
-              hintText: 'Escribe tu comentario…',
-              hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurface.withAlpha(120),
-              ),
-              contentPadding: const EdgeInsets.all(12),
-              border: InputBorder.none,
+        CarouselSlider.builder(
+          itemCount: widget.images.length,
+          itemBuilder: (context, index, realIndex) => ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: ImageWrapper(
+              url: ApiConstants.theMovieDbImageOriginalBaseUrl,
+              imagePath: widget.images[index].filePath,
+              defaultIcon: Icons.movie_outlined,
             ),
+          ),
+          options: CarouselOptions(
+            height: 170,
+            pageSnapping: true,
+            enlargeCenterPage: true,
+            onPageChanged: (index, reason) {
+              setState(() => _currentPage = index);
+            },
+          ),
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: widget.images
+              .asMap()
+              .entries
+              .map(
+                (e) => Container(
+                  height: 8,
+                  width: 8,
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color:
+                        (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black)
+                            .withAlpha(_currentPage == e.key ? 230 : 102),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ],
+    );
+  }
+}
+
+class _ActorsSection extends StatelessWidget {
+  final List<PersonEntity> actors;
+  const _ActorsSection({required this.actors});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
+          child: Text(
+            'Actores',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
+        SizedBox(
+          height: 320,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: actors.length,
+            itemBuilder: (context, index) => ActorCard(actor: actors[index]),
           ),
         ),
       ],

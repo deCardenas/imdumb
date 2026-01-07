@@ -53,7 +53,7 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
 
     return AnimatedBuilder(
       animation: _controller,
-      builder: (_, __) {
+      builder: (_, _) {
         final colors = isDark
             ? _darkColors(_controller.value)
             : _lightColors(_controller.value);

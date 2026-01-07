@@ -49,4 +49,10 @@ final class MoviesRepository implements IMoviesRepository {
     final creditsResponse = await remoteDataSource.getMovieCredits(movieId);
     return creditsResponse.toEntity();
   }
+
+  @override
+  Future<MoviesResponseEntity> getMovieList(String list, int page) async {
+    final moviesResponse = await remoteDataSource.getMovieList(list, page);
+    return moviesResponse.toEntity();
+  }
 }

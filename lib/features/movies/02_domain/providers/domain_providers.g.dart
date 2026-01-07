@@ -293,3 +293,292 @@ final class GetMovieCreditsUseCaseProvider
 
 String _$getMovieCreditsUseCaseHash() =>
     r'c0ea5579bb25487befe5b2a291b2c91ef38347ee';
+
+@ProviderFor(getMovieListUseCase)
+final getMovieListUseCaseProvider = GetMovieListUseCaseProvider._();
+
+final class GetMovieListUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetMovieListUseCase,
+          GetMovieListUseCase,
+          GetMovieListUseCase
+        >
+    with $Provider<GetMovieListUseCase> {
+  GetMovieListUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getMovieListUseCaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getMovieListUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetMovieListUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetMovieListUseCase create(Ref ref) {
+    return getMovieListUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetMovieListUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetMovieListUseCase>(value),
+    );
+  }
+}
+
+String _$getMovieListUseCaseHash() =>
+    r'10af90d22d5abac882c05be2639e8c4b6f58dda9';
+
+@ProviderFor(favoriteMovieRepository)
+final favoriteMovieRepositoryProvider = FavoriteMovieRepositoryProvider._();
+
+final class FavoriteMovieRepositoryProvider
+    extends
+        $FunctionalProvider<
+          IFavoriteMovieRepository,
+          IFavoriteMovieRepository,
+          IFavoriteMovieRepository
+        >
+    with $Provider<IFavoriteMovieRepository> {
+  FavoriteMovieRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'favoriteMovieRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$favoriteMovieRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<IFavoriteMovieRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  IFavoriteMovieRepository create(Ref ref) {
+    return favoriteMovieRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(IFavoriteMovieRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<IFavoriteMovieRepository>(value),
+    );
+  }
+}
+
+String _$favoriteMovieRepositoryHash() =>
+    r'2efadefd6a41d91cdf028332d637f47480c39735';
+
+@ProviderFor(addFavoriteMovieUseCase)
+final addFavoriteMovieUseCaseProvider = AddFavoriteMovieUseCaseProvider._();
+
+final class AddFavoriteMovieUseCaseProvider
+    extends
+        $FunctionalProvider<
+          AddFavoriteMovieUseCase,
+          AddFavoriteMovieUseCase,
+          AddFavoriteMovieUseCase
+        >
+    with $Provider<AddFavoriteMovieUseCase> {
+  AddFavoriteMovieUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'addFavoriteMovieUseCaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$addFavoriteMovieUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<AddFavoriteMovieUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  AddFavoriteMovieUseCase create(Ref ref) {
+    return addFavoriteMovieUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AddFavoriteMovieUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AddFavoriteMovieUseCase>(value),
+    );
+  }
+}
+
+String _$addFavoriteMovieUseCaseHash() =>
+    r'aa472cad14560bee15988c96f7e32331160b1658';
+
+@ProviderFor(removeFavoriteMovieUseCase)
+final removeFavoriteMovieUseCaseProvider =
+    RemoveFavoriteMovieUseCaseProvider._();
+
+final class RemoveFavoriteMovieUseCaseProvider
+    extends
+        $FunctionalProvider<
+          RemoveFavoriteMovieUseCase,
+          RemoveFavoriteMovieUseCase,
+          RemoveFavoriteMovieUseCase
+        >
+    with $Provider<RemoveFavoriteMovieUseCase> {
+  RemoveFavoriteMovieUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'removeFavoriteMovieUseCaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$removeFavoriteMovieUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<RemoveFavoriteMovieUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  RemoveFavoriteMovieUseCase create(Ref ref) {
+    return removeFavoriteMovieUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RemoveFavoriteMovieUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RemoveFavoriteMovieUseCase>(value),
+    );
+  }
+}
+
+String _$removeFavoriteMovieUseCaseHash() =>
+    r'b78a90780135dd3f2e1f0f290640ebecb8e6b07e';
+
+@ProviderFor(getFavoriteMoviesUseCase)
+final getFavoriteMoviesUseCaseProvider = GetFavoriteMoviesUseCaseProvider._();
+
+final class GetFavoriteMoviesUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetFavoriteMoviesUseCase,
+          GetFavoriteMoviesUseCase,
+          GetFavoriteMoviesUseCase
+        >
+    with $Provider<GetFavoriteMoviesUseCase> {
+  GetFavoriteMoviesUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getFavoriteMoviesUseCaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getFavoriteMoviesUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetFavoriteMoviesUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetFavoriteMoviesUseCase create(Ref ref) {
+    return getFavoriteMoviesUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetFavoriteMoviesUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetFavoriteMoviesUseCase>(value),
+    );
+  }
+}
+
+String _$getFavoriteMoviesUseCaseHash() =>
+    r'3bf215b5c285b0e205bf85980d318056f4a76ac2';
+
+@ProviderFor(isFavoriteMovieUseCase)
+final isFavoriteMovieUseCaseProvider = IsFavoriteMovieUseCaseProvider._();
+
+final class IsFavoriteMovieUseCaseProvider
+    extends
+        $FunctionalProvider<
+          IsFavoriteMovieUseCase,
+          IsFavoriteMovieUseCase,
+          IsFavoriteMovieUseCase
+        >
+    with $Provider<IsFavoriteMovieUseCase> {
+  IsFavoriteMovieUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isFavoriteMovieUseCaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isFavoriteMovieUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<IsFavoriteMovieUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  IsFavoriteMovieUseCase create(Ref ref) {
+    return isFavoriteMovieUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(IsFavoriteMovieUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<IsFavoriteMovieUseCase>(value),
+    );
+  }
+}
+
+String _$isFavoriteMovieUseCaseHash() =>
+    r'1d36c2b4867efbe03bfc0e0545c12cd76a2e4850';

@@ -41,7 +41,6 @@ class _GenreRowState extends ConsumerState<GenreRow> {
 
     if (position.pixels >= position.maxScrollExtent - 200) {
       final moviesPage = ref.read(moviesByGenreProvider(genreId));
-      if (moviesPage.requireValue.isLoadingMore) return;
       if (moviesPage.requireValue.paginationError == null) {
         ref.read(moviesByGenreProvider(genreId).notifier).loadMore();
       } else {
@@ -71,7 +70,7 @@ class _GenreRowState extends ConsumerState<GenreRow> {
                 ),
               ),
             ),
-            error: (_, __) => Center(
+            error: (_, _) => Center(
               child: Text(
                 'Error al cargar películas',
                 style: Theme.of(context).textTheme.bodyLarge,

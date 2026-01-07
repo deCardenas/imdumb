@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:imdumb/core/assets/assets.gen.dart';
+import 'package:imdumb/core/services/app_preferences_service.dart';
 import 'package:imdumb/core/services/remote_config_service.dart';
 import 'package:imdumb/routes/app_router.dart';
 
@@ -25,11 +26,18 @@ final class _SplashPageState extends ConsumerState<SplashPage> {
     // - Firebase Remote Config
     await Future.wait([
       RemoteConfigService.instance.init(),
-      Future.delayed(const Duration(seconds: 2)),
+      AppPreferencesService.instance.init(),
     ]);
     // - Auth
     // - Tokens
     // - Configuración inicial
+    final appPreferences = AppPreferencesService.instance;
+    if (appPreferences.movieLayout == null ||
+        appPreferences.movieList == null) {
+      appPreferences.movieLayout =
+          RemoteConfigService.instance.moviesDefaultLayout;
+      appPreferences.movieList = RemoteConfigService.instance.moviesDefaultList;
+    }
     if (!mounted) return;
     const HomeRoute().go(context);
   }

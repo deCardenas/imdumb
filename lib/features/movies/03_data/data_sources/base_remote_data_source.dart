@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:imdumb/core/client/api_client.dart';
+import 'package:imdumb/core/services/remote_config_service.dart';
 
 abstract class BaseRemoteDataSource {
   final ApiClient _apiClient;
@@ -10,7 +11,5 @@ abstract class BaseRemoteDataSource {
   ApiClient get apiClient => _apiClient;
 
   @protected
-  String get tmdbApiKey => kDebugMode
-      ? '0777a4784320df99f22cfb59888f5422'
-      : String.fromEnvironment('TMDB_KEY');
+  String get tmdbApiKey => RemoteConfigService.instance.theMovieDbApiKey;
 }

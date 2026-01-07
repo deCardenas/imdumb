@@ -14,4 +14,5 @@ abstract interface class IMoviesDataSource {
   Future<ImagesResponse> getMovieImages(int movieId);
 
   Future<CreditsResponse> getMovieCredits(int movieId);
+  Future<MoviesResponse> getMovieList(String list, int page);
 }

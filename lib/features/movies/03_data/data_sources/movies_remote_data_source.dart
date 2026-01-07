@@ -65,4 +65,14 @@ final class MoviesRemoteDataSource extends BaseRemoteDataSource
     final data = CreditsResponse.fromJson(response.data);
     return Future.value(data);
   }
+
+  @override
+  Future<MoviesResponse> getMovieList(String list, int page) async {
+    final response = await apiClient.get(
+      '/movie/$list',
+      queryParameters: {'api_key': tmdbApiKey, 'page': page, 'language': 'es'},
+    );
+    final data = MoviesResponse.fromJson(response.data);
+    return data;
+  }
 }

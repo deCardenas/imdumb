@@ -1,5 +1,6 @@
 import 'package:imdumb/features/movies/02_domain/entities/movie.dart';
 import 'package:imdumb/features/movies/02_domain/entities/movies_response.dart';
+import 'package:imdumb/features/movies/03_data/models/favorite_movie_model.dart';
 import 'package:imdumb/features/movies/03_data/models/movies_responde.dart';
 
 extension MoviesResponseModelMapper on MoviesResponse {
@@ -22,7 +23,36 @@ extension MovieModelMapper on MovieModel {
       posterPath: posterPath,
       voteAverage: voteAverage,
       voteCount: voteCount,
-      genreIds: genreIds,
+      releaseDate: releaseDate,
+      isFavorite: false,
+    );
+  }
+}
+
+extension FavoriteMovieModelMapper on FavoriteMovieHiveModel {
+  Movie toEntity() {
+    return Movie(
+      id: id,
+      title: title,
+      overview: overview,
+      posterPath: posterPath,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+      releaseDate: releaseDate,
+      isFavorite: true,
+    );
+  }
+}
+
+extension MovieMapper on Movie {
+  FavoriteMovieHiveModel toHive() {
+    return FavoriteMovieHiveModel(
+      id: id,
+      title: title,
+      overview: overview,
+      posterPath: posterPath,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
       releaseDate: releaseDate,
     );
   }

@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:imdumb/app_theme.dart' show lightTheme, darkTheme;
 import 'package:imdumb/core/loggers/state_logger.dart';
+import 'package:imdumb/features/movies/03_data/models/favorite_movie_model.dart';
+import 'package:imdumb/features/movies/03_data/providers/data_providers.dart';
 import 'package:imdumb/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:imdumb/routes/app_router.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,9 +20,15 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await _initCrashlytics();
 
+  final appDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDir.path);
+  Hive.registerAdapter(FavoriteMovieHiveModelAdapter());
+  final favoritesBox = await Hive.openBox<FavoriteMovieHiveModel>('favorites');
+
   runApp(
     ProviderScope(
       observers: kDebugMode ? [StateLogger()] : null,
+      overrides: [favoritesBoxProvider.overrideWithValue(favoritesBox)],
       child: const MyApp(),
     ),
   );
@@ -90,7 +100,7 @@ class _MyAppState extends State<MyApp> {
       },
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
     );
   }
 }

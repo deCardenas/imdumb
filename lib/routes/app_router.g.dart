@@ -9,8 +9,6 @@ part of 'app_router.dart';
 List<RouteBase> get $appRoutes => [
   $splashRoute,
   $mainShellRoute,
-  $settingsRoute,
-  $searchRoute,
   $movieDetailRoute,
 ];
 
@@ -97,52 +95,6 @@ mixin $ExploreRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/explore');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $settingsRoute =>
-    GoRouteData.$route(path: '/settings', factory: $SettingsRoute._fromState);
-
-mixin $SettingsRoute on GoRouteData {
-  static SettingsRoute _fromState(GoRouterState state) => const SettingsRoute();
-
-  @override
-  String get location => GoRouteData.$location('/settings');
-
-  @override
-  void go(BuildContext context) => context.go(location);
-
-  @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  @override
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  @override
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $searchRoute =>
-    GoRouteData.$route(path: '/search', factory: $SearchRoute._fromState);
-
-mixin $SearchRoute on GoRouteData {
-  static SearchRoute _fromState(GoRouterState state) => const SearchRoute();
-
-  @override
-  String get location => GoRouteData.$location('/search');
 
   @override
   void go(BuildContext context) => context.go(location);

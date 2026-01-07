@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' show GoRouterHelper, GoRouterState;
 import 'package:imdumb/core/assets/assets.gen.dart';
 import 'package:imdumb/features/shared/01_presentation/pages/base_page.dart';
-import 'package:imdumb/routes/app_router.dart';
 
 final class MainScaffoldPage extends StatelessWidget {
   const MainScaffoldPage({super.key, required this.child});
@@ -30,22 +29,6 @@ final class MainScaffoldPage extends StatelessWidget {
               child: Assets.images.icLauncher.image(height: 16, width: 16),
             ),
             title: const Text('IMDUMB'),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  const SettingsRoute().push(context);
-                },
-                icon: const Icon(Icons.settings),
-                tooltip: 'Configuración',
-              ),
-              IconButton(
-                onPressed: () {
-                  const SearchRoute().push(context);
-                },
-                icon: const Icon(Icons.search),
-                tooltip: 'Busqueda',
-              ),
-            ],
           ),
           Expanded(child: child),
           NavigationBar(
